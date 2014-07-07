@@ -3,16 +3,14 @@ package org.vaadin.alump.offlinebuilder.gwt.client.conn;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.communication.StateChangeEvent;
-import com.vaadin.client.ui.VCssLayout;
 import com.vaadin.client.ui.VLabel;
 import com.vaadin.client.ui.label.LabelConnector;
 import com.vaadin.shared.communication.SharedState;
 import com.vaadin.shared.ui.Connect;
+import org.vaadin.alump.offlinebuilder.gwt.client.offline.OLabelFactory;
 import org.vaadin.alump.offlinebuilder.gwt.client.offline.OfflineFactory;
-import org.vaadin.alump.offlinebuilder.gwt.client.offline.OfflineLabelFactory;
-import org.vaadin.alump.offlinebuilder.gwt.client.state.OfflineLabelState;
+import org.vaadin.alump.offlinebuilder.gwt.client.state.OLabelState;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -21,21 +19,23 @@ import java.util.logging.Logger;
 @Connect(org.vaadin.alump.offlinebuilder.OfflineLabel.class)
 public class OLabelConnector extends LabelConnector implements OfflineConnector {
 
-    private OfflineLabelState offlineState;
+    private OLabelState offlineState;
     private boolean offlineMode;
     private final static Logger logger = Logger.getLogger(OLabelConnector.class.getName());
 
-    public OfflineLabelState getState() {
+    @Override
+    public OLabelState getState() {
         if(offlineState != null) {
             return offlineState;
         } else {
-            return (OfflineLabelState) super.getState();
+            return (OLabelState) super.getState();
         }
     }
 
+    @Override
     public SharedState createState() {
         if(offlineMode) {
-            return new OfflineLabelState();
+            return new OLabelState();
         } else {
             return super.createState();
         }
@@ -53,7 +53,7 @@ public class OLabelConnector extends LabelConnector implements OfflineConnector 
 
     @Override
     public void onOfflineState(SharedState state) {
-        offlineState = (OfflineLabelState)state;
+        offlineState = (OLabelState)state;
         StateChangeEvent event = new StateChangeEvent(this, null, true);
         onStateChanged(event);
     }
@@ -64,21 +64,8 @@ public class OLabelConnector extends LabelConnector implements OfflineConnector 
     }
 
     @Override
-    public void onOfflineHierarchy(List<OfflineConnector> children) {
-        // ignore
-    }
-
-    @Override
     public Class<? extends OfflineFactory> getOfflineFactoryClass() {
-        return OfflineLabelFactory.class;
-    }
-
-    @Override
-    public void init() {
-        if(getConnection() == null) {
-
-        }
-        super.init();
+        return OLabelFactory.class;
     }
 
     @Override

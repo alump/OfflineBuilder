@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by alump on 09/06/14.
  */
-public class BrokenOfflineConnector implements OfflineConnector {
+public class BrokenOfflineConnector implements OfflineContainerConnector {
 
     protected Widget widget;
     protected String failedID;
@@ -62,11 +62,6 @@ public class BrokenOfflineConnector implements OfflineConnector {
     }
 
     @Override
-    public void onOfflineHierarchy(List<OfflineConnector> children) {
-        // ignore
-    }
-
-    @Override
     public void setOffline(boolean offline) {
         // ignore
     }
@@ -76,5 +71,10 @@ public class BrokenOfflineConnector implements OfflineConnector {
         label.addStyleName("offline-error");
         label.setText("Failed to offline construct: '" + SafeHtmlUtils.htmlEscape(failedID) + "'");
         return label;
+    }
+
+    @Override
+    public void onOfflineHierarchy(List<OfflineConnector> children) {
+        // ignore
     }
 }

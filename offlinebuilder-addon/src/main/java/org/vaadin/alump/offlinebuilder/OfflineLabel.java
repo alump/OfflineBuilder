@@ -1,7 +1,7 @@
 package org.vaadin.alump.offlinebuilder;
 
 import com.vaadin.ui.Label;
-import org.vaadin.alump.offlinebuilder.gwt.client.state.OfflineLabelState;
+import org.vaadin.alump.offlinebuilder.gwt.client.state.OLabelState;
 
 /**
  * Created by alump on 09/06/14.
@@ -16,7 +16,7 @@ public class OfflineLabel extends Label implements OfflineComponent {
         super(content);
     }
 
-    public OfflineLabelState getState() {
-        return (OfflineLabelState)super.getState();
+    public OLabelState getState() {
+        return (OLabelState)super.getState();
     }
 }

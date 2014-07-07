@@ -44,7 +44,5 @@ public interface OfflineConnector {
      */
     void onOfflineState(SharedState state);
 
-    void onOfflineHierarchy(List<OfflineConnector> children);
-
     void setOffline(boolean offline);
 }

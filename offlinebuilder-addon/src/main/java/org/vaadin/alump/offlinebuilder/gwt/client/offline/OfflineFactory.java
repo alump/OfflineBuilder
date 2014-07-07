@@ -14,6 +14,7 @@ import com.google.gwt.storage.client.Storage;
 import com.vaadin.shared.communication.SharedState;
 import org.vaadin.alump.offlinebuilder.gwt.client.FactoryFromString;
 import org.vaadin.alump.offlinebuilder.gwt.client.conn.OfflineConnector;
+import org.vaadin.alump.offlinebuilder.gwt.client.conn.OfflineContainerConnector;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -89,7 +90,7 @@ public abstract class OfflineFactory {
                 childFactories.add(childFactory);
             }
             if(!children.isEmpty()) {
-                connector.onOfflineHierarchy(children);
+                ((OfflineContainerConnector)connector).onOfflineHierarchy(children);
             }
             for(int i = 0; i < childFactories.size(); ++i) {
                 childFactories.get(i).readState(children.get(i));

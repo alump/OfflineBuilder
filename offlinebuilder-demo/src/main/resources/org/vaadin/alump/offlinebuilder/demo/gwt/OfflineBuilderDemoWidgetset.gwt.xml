@@ -3,7 +3,12 @@
 <module>
 	<inherits name="org.vaadin.alump.offlinebuilder.gwt.OfflineBuilderWidgetset"/>
 
-	<!-- make sure also theme files are linked -->
+	<!-- add application theme folder to manifest -->
+	<set-configuration-property
+			name="touchkit.manifestlinker.additionalCacheRoot"
+			value="src/main/webapp/VAADIN/themes/demo:../../../VAADIN/themes/demo" />
+
+	<!-- make sure also ondemand compiled css is linked -->
 	<define-linker name="touchkitcachemanifest"
 				   class="org.vaadin.alump.offlinebuilder.demo.gwt.DemoCacheManifestLinker" />
 

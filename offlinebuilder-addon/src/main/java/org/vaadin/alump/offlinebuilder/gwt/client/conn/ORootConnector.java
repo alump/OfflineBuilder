@@ -56,11 +56,6 @@ public class ORootConnector implements OfflineConnector {
     }
 
     @Override
-    public void onOfflineHierarchy(List<OfflineConnector> children) {
-        // ignore
-    }
-
-    @Override
     public void setOffline(boolean offline) {
         // ignore
     }
