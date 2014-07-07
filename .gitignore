@@ -4,5 +4,5 @@ offlinebuilder-demo/offlinebuilder-demo.iml
 .idea/
 offlinebuilder-addon/target/
 offlinebuilder-demo/src/main/webapp/VAADIN/gwt-unitCache/
-offlinebuilder-demo/src/main/webapp/VAADIN/widgetset/
+offlinebuilder-demo/src/main/webapp/VAADIN/widgetsets/
 offlinebuilder-demo/target/

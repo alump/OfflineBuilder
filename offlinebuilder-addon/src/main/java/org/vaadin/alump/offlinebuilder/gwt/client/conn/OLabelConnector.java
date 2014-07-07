@@ -60,15 +60,7 @@ public class OLabelConnector extends LabelConnector implements OfflineConnector 
 
     @Override
     public void onStateChanged(StateChangeEvent event) {
-        logger.severe("on state change, type " + getState().contentMode);
         super.onStateChanged(event);
-        switch (getState().contentMode) {
-            case TEXT:
-                logger.severe("Set text: " + getState().text);
-                getWidget().setText(getState().text);
-            default:
-                break;
-        }
     }
 
     @Override

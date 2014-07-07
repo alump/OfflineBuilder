@@ -6,15 +6,12 @@ import com.vaadin.client.ApplicationConnection;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.communication.JsonDecoder;
 import com.vaadin.client.communication.JsonEncoder;
-import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.metadata.Type;
 import com.vaadin.client.ui.AbstractComponentConnector;
 import com.vaadin.client.ui.AbstractHasComponentsConnector;
-import com.vaadin.shared.AbstractComponentState;
 
 import com.google.gwt.storage.client.Storage;
 import com.vaadin.shared.communication.SharedState;
-import org.vaadin.alump.offlinebuilder.gwt.client.BuilderOfflineMode;
 import org.vaadin.alump.offlinebuilder.gwt.client.FactoryFromString;
 import org.vaadin.alump.offlinebuilder.gwt.client.conn.OfflineConnector;
 
@@ -75,7 +72,8 @@ public abstract class OfflineFactory {
     protected void readState(OfflineConnector connector) {
         String jsonState = getItem(STATE_KEY);
         connector.setOffline(true);
-        connector.onOfflineState(decodeState(jsonState, connector.getState(), connector.getConnection()));
+        SharedState state = decodeState(jsonState, connector.getState(), connector.getConnection());
+        connector.onOfflineState(state);
         String jsonChildren = getItem(CHILDREN_KEY);
 
         if(jsonChildren != null) {
@@ -175,7 +173,8 @@ public abstract class OfflineFactory {
 
     protected SharedState decodeState(String jsonState, SharedState state, ApplicationConnection connection) {
         JSONValue value = JSONParser.parseStrict(jsonState);
-        return (SharedState)JsonDecoder.decodeValue(new Type(state.getClass()), value, state, connection);
+        SharedState ret = (SharedState) JsonDecoder.decodeValue(new Type(state.getClass().getName(), null), value, state, connection);
+        return ret;
     }
 
     public static OfflineFactory getOfflineFactory(String pid) {

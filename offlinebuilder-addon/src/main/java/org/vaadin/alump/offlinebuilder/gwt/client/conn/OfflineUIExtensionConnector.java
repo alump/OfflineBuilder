@@ -29,7 +29,7 @@ public class OfflineUIExtensionConnector extends AbstractExtensionConnector {
     public void onStateChanged(StateChangeEvent event) {
         super.onStateChanged(event);
 
-        getRootFactory().writeState(getState());
+        getRootFactory().writeState(getState(), getConnection());
     }
 
     public RootOfflineFactory getRootFactory() {

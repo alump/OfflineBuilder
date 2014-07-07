@@ -1,4 +1,4 @@
-package offlinebulder.demo;
+package org.vaadin.alump.offlinebuilder.demo;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
@@ -30,6 +30,7 @@ public class DemoUI extends UI {
         OfflineUIExtension offlineExtension = OfflineUIExtension.get(this);
 
         OfflineCssLayout layout = new OfflineCssLayout();
+        layout.addStyleName("main-layout");
         setContent(layout);
         offlineExtension.setOfflineRoot(layout);
 

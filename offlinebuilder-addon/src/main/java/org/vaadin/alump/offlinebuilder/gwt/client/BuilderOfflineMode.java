@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.addon.touchkit.gwt.client.offlinemode.DefaultOfflineMode;
 import com.vaadin.addon.touchkit.gwt.client.offlinemode.OfflineMode;
+import com.vaadin.client.metadata.ConnectorBundleLoader;
 import com.vaadin.client.ui.AbstractComponentConnector;
 import com.vaadin.client.ui.VOverlay;
 import org.vaadin.alump.offlinebuilder.gwt.client.conn.ORootConnector;
@@ -30,6 +31,10 @@ public class BuilderOfflineMode extends DefaultOfflineMode {
 
     @Override
     protected void buildDefaultContent() {
+        // Make sure metadata is loaded
+        ConnectorBundleLoader.get().loadBundle(
+                ConnectorBundleLoader.EAGER_BUNDLE_NAME, null);
+
         logger.severe("build default content");
         getPanel().clear();
         if(rootConnector == null) {
@@ -41,6 +46,7 @@ public class BuilderOfflineMode extends DefaultOfflineMode {
             if(rootWidget != null) {
                 logger.severe("Adding root widget");
                 getPanel().add(rootWidget);
+                resolveRootFactory().readState(rootConnector);
             } else {
                 HTML errorLabel = new HTML();
                 errorLabel.setHTML("<h1>FAIL no root widget</h1>");
