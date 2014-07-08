@@ -5,8 +5,8 @@ import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.core.ext.typeinfo.TypeOracle;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
-import org.vaadin.alump.offlinebuilder.gwt.client.FactoryFromString;
-import org.vaadin.alump.offlinebuilder.gwt.client.offline.OfflineFactory;
+import org.vaadin.alump.offlinebuilder.gwt.client.InstanceFromClassName;
+import org.vaadin.alump.offlinebuilder.gwt.client.conn.OfflineConnector;
 
 import java.io.PrintWriter;
 import java.util.LinkedList;
@@ -15,9 +15,9 @@ import java.util.List;
 /**
  * Created by alump on 09/06/14.
  */
-public class FactoryReflectionGenerator extends Generator {
+public class OfflineConnectorReflectionGenerator extends Generator {
 
-    public static final Class<?> REQUIRED_INTERFACE = OfflineFactory.class;
+    public static final Class<?> REQUIRED_INTERFACE = OfflineConnector.class;
 
     @Override
     public String generate(TreeLogger treeLogger, GeneratorContext context, String typeName) throws UnableToCompleteException {
@@ -27,13 +27,13 @@ public class FactoryReflectionGenerator extends Generator {
         // find package name for the generated implementing class
         // use same package as has the interface
         // example: my.code.client.reflection
-        final String genPackageName = FactoryFromString.class.getPackage().getName();
+        final String genPackageName = InstanceFromClassName.class.getPackage().getName();
         treeLogger.log(TreeLogger.Type.INFO, "genPackageName: " + genPackageName);
 
         // find class name for the generated implementing class
         // base the name on the interface class name, suffix it
         // example: my.code.client.reflection.ClassFromStringFactoryImpl
-        final String genClassName = FactoryFromString.class.getSimpleName() + "Impl";
+        final String genClassName = InstanceFromClassName.class.getSimpleName() + "Impl";
         treeLogger.log(TreeLogger.Type.INFO, "genClassName: " + genClassName);
 
         // prepare Composer. Composer prepares shell of the Java code, so we need to set package and class name
@@ -50,7 +50,7 @@ public class FactoryReflectionGenerator extends Generator {
             // Add interface to factory class signature
             // Example: ClassFromStringFactoryImpl implements ClassFromStringFactory
             // composer#addImplementedInterface() must be called before composer#createSourceWriter()
-            composer.addImplementedInterface(FactoryFromString.class.getSimpleName());
+            composer.addImplementedInterface(InstanceFromClassName.class.getSimpleName());
 
             // Get source stream from Composer. It already contains shell of the new class
             // like package, imports and full class signature

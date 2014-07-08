@@ -13,8 +13,6 @@ import java.util.List;
  */
 public interface OfflineConnector {
 
-    Class <? extends OfflineFactory> getOfflineFactoryClass();
-
     /**
      * Matching with method in connector
      * @return

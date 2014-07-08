@@ -5,6 +5,8 @@ import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.UI;
 import org.vaadin.alump.offlinebuilder.*;
 
@@ -42,6 +44,16 @@ public class DemoUI extends UI {
         image.setSource(new ThemeResource("img/offline.png"));
         layout.addComponent(image);
 
+        /*
+        OfflineButton button = new OfflineButton("Ping server");
+        button.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent clickEvent) {
+                Notification.show("Server says pong!");
+            }
+        });
+        layout.addComponent(button);
+        */
     }
 
 }

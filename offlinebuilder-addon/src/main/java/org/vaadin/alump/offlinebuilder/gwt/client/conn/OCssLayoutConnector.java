@@ -9,15 +9,13 @@ import com.vaadin.client.ui.VCssLayout;
 import com.vaadin.client.ui.csslayout.CssLayoutConnector;
 import com.vaadin.shared.communication.SharedState;
 import com.vaadin.shared.ui.Connect;
-import org.vaadin.alump.offlinebuilder.gwt.client.offline.OCssLayoutFactory;
-import org.vaadin.alump.offlinebuilder.gwt.client.offline.OfflineFactory;
 import org.vaadin.alump.offlinebuilder.gwt.client.state.OCssLayoutState;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Connect(org.vaadin.alump.offlinebuilder.OfflineCssLayout.class)
+@Connect(value = org.vaadin.alump.offlinebuilder.OfflineCssLayout.class, loadStyle = Connect.LoadStyle.EAGER)
 public class OCssLayoutConnector extends CssLayoutConnector implements OfflineContainerConnector {
 
     private static final Logger logger = Logger.getLogger(OCssLayoutConnector.class.getName());
@@ -74,11 +72,6 @@ public class OCssLayoutConnector extends CssLayoutConnector implements OfflineCo
     @Override
     public void setOffline(boolean offline) {
         offlineMode = offline;
-    }
-
-    @Override
-    public Class<? extends OfflineFactory> getOfflineFactoryClass() {
-        return OCssLayoutFactory.class;
     }
 
     @Override

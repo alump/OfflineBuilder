@@ -1,11 +1,11 @@
 package org.vaadin.alump.offlinebuilder.gwt.client.conn;
 
+import com.google.gwt.core.client.GWT;
 import com.vaadin.client.ServerConnector;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
 import com.vaadin.shared.ui.Connect;
-import org.vaadin.alump.offlinebuilder.OfflineUIExtension;
-import org.vaadin.alump.offlinebuilder.gwt.client.offline.RootOfflineFactory;
+import org.vaadin.alump.offlinebuilder.gwt.client.offline.OfflineFactory;
 import org.vaadin.alump.offlinebuilder.gwt.client.state.OfflineUIExtensionState;
 
 /**
@@ -14,7 +14,7 @@ import org.vaadin.alump.offlinebuilder.gwt.client.state.OfflineUIExtensionState;
 @Connect(org.vaadin.alump.offlinebuilder.OfflineUIExtension.class)
 public class OfflineUIExtensionConnector extends AbstractExtensionConnector {
 
-    private RootOfflineFactory rootFactory;
+    protected OfflineFactory offlineFactory;
 
     @Override
     protected void extend(ServerConnector target) {
@@ -29,13 +29,13 @@ public class OfflineUIExtensionConnector extends AbstractExtensionConnector {
     public void onStateChanged(StateChangeEvent event) {
         super.onStateChanged(event);
 
-        getRootFactory().writeState(getState(), getConnection());
+        getOfflineFactory().writeRootState(getState(), getConnection());
     }
 
-    public RootOfflineFactory getRootFactory() {
-        if(rootFactory == null) {
-            rootFactory = new RootOfflineFactory();
+    public OfflineFactory getOfflineFactory() {
+        if(offlineFactory == null) {
+            offlineFactory = GWT.create(OfflineFactory.class);
         }
-        return rootFactory;
+        return offlineFactory;
     }
 }

@@ -7,8 +7,6 @@ import com.vaadin.client.ui.VLabel;
 import com.vaadin.client.ui.label.LabelConnector;
 import com.vaadin.shared.communication.SharedState;
 import com.vaadin.shared.ui.Connect;
-import org.vaadin.alump.offlinebuilder.gwt.client.offline.OLabelFactory;
-import org.vaadin.alump.offlinebuilder.gwt.client.offline.OfflineFactory;
 import org.vaadin.alump.offlinebuilder.gwt.client.state.OLabelState;
 
 import java.util.logging.Logger;
@@ -16,7 +14,7 @@ import java.util.logging.Logger;
 /**
  * Created by alump on 09/06/14.
  */
-@Connect(org.vaadin.alump.offlinebuilder.OfflineLabel.class)
+@Connect(value = org.vaadin.alump.offlinebuilder.OfflineLabel.class, loadStyle = Connect.LoadStyle.EAGER)
 public class OLabelConnector extends LabelConnector implements OfflineConnector {
 
     private OLabelState offlineState;
@@ -61,11 +59,6 @@ public class OLabelConnector extends LabelConnector implements OfflineConnector 
     @Override
     public void onStateChanged(StateChangeEvent event) {
         super.onStateChanged(event);
-    }
-
-    @Override
-    public Class<? extends OfflineFactory> getOfflineFactoryClass() {
-        return OLabelFactory.class;
     }
 
     @Override

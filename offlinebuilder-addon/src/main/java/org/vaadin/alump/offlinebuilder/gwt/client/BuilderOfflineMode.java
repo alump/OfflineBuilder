@@ -12,7 +12,6 @@ import com.vaadin.client.ui.VOverlay;
 import org.vaadin.alump.offlinebuilder.gwt.client.conn.ORootConnector;
 import org.vaadin.alump.offlinebuilder.gwt.client.conn.OfflineConnector;
 import org.vaadin.alump.offlinebuilder.gwt.client.offline.OfflineFactory;
-import org.vaadin.alump.offlinebuilder.gwt.client.offline.RootOfflineFactory;
 
 import java.util.logging.Logger;
 
@@ -26,6 +25,7 @@ public class BuilderOfflineMode extends DefaultOfflineMode {
     //protected VOverlay overlay;
     //protected static final int Z_INDEX = 30001;
     //protected boolean active = false;
+    protected OfflineFactory offlineFactory;
 
     private static final Logger logger = Logger.getLogger(BuilderOfflineMode.class.getName());
 
@@ -38,7 +38,7 @@ public class BuilderOfflineMode extends DefaultOfflineMode {
         logger.severe("build default content");
         getPanel().clear();
         if(rootConnector == null) {
-            rootConnector = resolveRootFactory().createRoot();
+            rootConnector = GWT.create(ORootConnector.class);
 
         }
         if(rootConnector != null) {
@@ -46,7 +46,7 @@ public class BuilderOfflineMode extends DefaultOfflineMode {
             if(rootWidget != null) {
                 logger.severe("Adding root widget");
                 getPanel().add(rootWidget);
-                resolveRootFactory().readState(rootConnector);
+                getOfflineFactory().readRootState(rootConnector);
             } else {
                 HTML errorLabel = new HTML();
                 errorLabel.setHTML("<h1>FAIL no root widget</h1>");
@@ -109,12 +109,15 @@ public class BuilderOfflineMode extends DefaultOfflineMode {
     }
     */
 
-    protected RootOfflineFactory resolveRootFactory() {
-        return new RootOfflineFactory();
-    }
-
     public static Widget resolveWidget(OfflineConnector connector) {
         return ((AbstractComponentConnector)connector).getWidget();
+    }
+
+    public OfflineFactory getOfflineFactory() {
+        if(offlineFactory == null) {
+            offlineFactory = GWT.create(OfflineFactory.class);
+        }
+        return offlineFactory;
     }
 
 }

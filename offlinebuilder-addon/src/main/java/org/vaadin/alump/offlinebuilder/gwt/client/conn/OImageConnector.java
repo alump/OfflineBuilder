@@ -4,8 +4,6 @@ import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.image.ImageConnector;
 import com.vaadin.shared.communication.SharedState;
 import com.vaadin.shared.ui.Connect;
-import org.vaadin.alump.offlinebuilder.gwt.client.offline.OImageFactory;
-import org.vaadin.alump.offlinebuilder.gwt.client.offline.OfflineFactory;
 import org.vaadin.alump.offlinebuilder.gwt.client.state.OImageState;
 
 import java.util.logging.Logger;
@@ -13,7 +11,7 @@ import java.util.logging.Logger;
 /**
  * Created by alump on 07/07/14.
  */
-@Connect(org.vaadin.alump.offlinebuilder.OfflineImage.class)
+@Connect(value = org.vaadin.alump.offlinebuilder.OfflineImage.class, loadStyle = Connect.LoadStyle.EAGER)
 public class OImageConnector extends ImageConnector implements OfflineConnector {
 
     private OImageState offlineState;
@@ -36,11 +34,6 @@ public class OImageConnector extends ImageConnector implements OfflineConnector 
         } else {
             return super.createState();
         }
-    }
-
-    @Override
-    public Class<? extends OfflineFactory> getOfflineFactoryClass() {
-        return OImageFactory.class;
     }
 
     @Override

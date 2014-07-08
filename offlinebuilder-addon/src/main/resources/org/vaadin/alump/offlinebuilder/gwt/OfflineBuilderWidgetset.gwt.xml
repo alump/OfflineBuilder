@@ -10,7 +10,7 @@
 	</replace-with>
 
 	<!-- Allows generating new instances of factory objects -->
-	<generate-with class="org.vaadin.alump.offlinebuilder.gwt.FactoryReflectionGenerator">
-		<when-type-assignable class="org.vaadin.alump.offlinebuilder.gwt.client.FactoryFromString" />
+	<generate-with class="org.vaadin.alump.offlinebuilder.gwt.OfflineConnectorReflectionGenerator">
+		<when-type-assignable class="org.vaadin.alump.offlinebuilder.gwt.client.InstanceFromClassName" />
 	</generate-with>
 </module>
