@@ -2,12 +2,11 @@ package org.vaadin.alump.offlinebuilder;
 
 import com.vaadin.server.Resource;
 import com.vaadin.ui.Button;
-import org.vaadin.alump.offlinebuilder.gwt.client.state.OButtonState;
+import org.vaadin.alump.offlinebuilder.gwt.shared.OButtonState;
 
 /**
  * Broken (serilization issue with numbers in state)
  */
-@Deprecated
 public class OfflineButton extends Button implements OfflineComponent {
 
     public OfflineButton() {

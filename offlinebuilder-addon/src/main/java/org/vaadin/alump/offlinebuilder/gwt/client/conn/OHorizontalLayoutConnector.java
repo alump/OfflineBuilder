@@ -1,39 +1,40 @@
 package org.vaadin.alump.offlinebuilder.gwt.client.conn;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;
-import com.vaadin.client.ui.VCssLayout;
-import com.vaadin.client.ui.csslayout.CssLayoutConnector;
+import com.vaadin.client.ui.orderedlayout.HorizontalLayoutConnector;
 import com.vaadin.shared.communication.SharedState;
 import com.vaadin.shared.ui.Connect;
-import com.vaadin.shared.ui.csslayout.CssLayoutState;
+import com.vaadin.shared.ui.orderedlayout.HorizontalLayoutState;
+import com.vaadin.shared.ui.orderedlayout.VerticalLayoutState;
+import com.vaadin.ui.HorizontalLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Connect(value = org.vaadin.alump.offlinebuilder.OfflineCssLayout.class, loadStyle = Connect.LoadStyle.EAGER)
-public class OCssLayoutConnector extends CssLayoutConnector implements OfflineContainerConnector {
-
-    private static final Logger logger = Logger.getLogger(OCssLayoutConnector.class.getName());
-    private CssLayoutState offlineState;
+/**
+ * Created by alump on 09/07/14.
+ */
+@Connect(value = org.vaadin.alump.offlinebuilder.OfflineHorizontalLayout.class, loadStyle = Connect.LoadStyle.EAGER)
+public class OHorizontalLayoutConnector extends HorizontalLayoutConnector implements OfflineContainerConnector {
+    private static final Logger logger = Logger.getLogger(OHorizontalLayoutConnector.class.getName());
+    private HorizontalLayoutState offlineState;
     private List<ComponentConnector> offlineChildren;
     private boolean offlineMode = false;
 
-    public CssLayoutState getState() {
+    public HorizontalLayoutState getState() {
         if(offlineState != null) {
             return offlineState;
         } else {
-            return (CssLayoutState) super.getState();
+            return (HorizontalLayoutState) super.getState();
         }
     }
 
     @Override
     public void onOfflineState(SharedState state) {
-        offlineState = (CssLayoutState)state;
+        offlineState = (HorizontalLayoutState)state;
         StateChangeEvent event = new StateChangeEvent(this, null, true);
         this.onStateChanged(event);
     }
@@ -68,5 +69,4 @@ public class OCssLayoutConnector extends CssLayoutConnector implements OfflineCo
             return super.getChildComponents();
         }
     }
-
 }

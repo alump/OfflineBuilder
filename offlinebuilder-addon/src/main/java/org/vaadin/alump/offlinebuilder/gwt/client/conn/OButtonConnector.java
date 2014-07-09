@@ -6,7 +6,7 @@ import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.button.ButtonConnector;
 import com.vaadin.shared.communication.SharedState;
 import com.vaadin.shared.ui.Connect;
-import org.vaadin.alump.offlinebuilder.gwt.client.state.OButtonState;
+import org.vaadin.alump.offlinebuilder.gwt.shared.OButtonState;
 
 import java.util.logging.Logger;
 
@@ -31,6 +31,12 @@ public class OButtonConnector extends ButtonConnector implements OfflineConnecto
     @Override
     public void onOfflineState(SharedState state) {
         offlineState = (OButtonState)state;
+
+        // TODO: replace with offline handler checks
+        if(offlineState.disableInOfflineMode) {
+            offlineState.enabled = false;
+        }
+
         StateChangeEvent event = new StateChangeEvent(this, null, true);
         onStateChanged(event);
     }

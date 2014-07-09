@@ -6,7 +6,7 @@ import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.extensions.AbstractExtensionConnector;
 import com.vaadin.shared.ui.Connect;
 import org.vaadin.alump.offlinebuilder.gwt.client.offline.OfflineFactory;
-import org.vaadin.alump.offlinebuilder.gwt.client.state.OfflineUIExtensionState;
+import org.vaadin.alump.offlinebuilder.gwt.shared.OfflineUIExtensionState;
 
 /**
  * Created by alump on 16/06/14.

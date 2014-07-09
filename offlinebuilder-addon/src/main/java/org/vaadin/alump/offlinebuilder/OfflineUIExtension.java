@@ -5,7 +5,7 @@ import com.vaadin.server.AbstractExtension;
 import com.vaadin.server.Extension;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
-import org.vaadin.alump.offlinebuilder.gwt.client.state.OfflineUIExtensionState;
+import org.vaadin.alump.offlinebuilder.gwt.shared.OfflineUIExtensionState;
 
 /**
  * Created by alump on 16/06/14.

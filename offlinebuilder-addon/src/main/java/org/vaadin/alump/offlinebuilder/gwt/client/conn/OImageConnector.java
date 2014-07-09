@@ -4,7 +4,7 @@ import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.image.ImageConnector;
 import com.vaadin.shared.communication.SharedState;
 import com.vaadin.shared.ui.Connect;
-import org.vaadin.alump.offlinebuilder.gwt.client.state.OImageState;
+import com.vaadin.shared.ui.image.ImageState;
 
 import java.util.logging.Logger;
 
@@ -14,31 +14,22 @@ import java.util.logging.Logger;
 @Connect(value = org.vaadin.alump.offlinebuilder.OfflineImage.class, loadStyle = Connect.LoadStyle.EAGER)
 public class OImageConnector extends ImageConnector implements OfflineConnector {
 
-    private OImageState offlineState;
+    private ImageState offlineState;
     private boolean offlineMode;
     private final static Logger logger = Logger.getLogger(OImageConnector.class.getName());
 
     @Override
-    public OImageState getState() {
+    public ImageState getState() {
         if(offlineState != null) {
             return offlineState;
         } else {
-            return (OImageState) super.getState();
-        }
-    }
-
-    @Override
-    public SharedState createState() {
-        if(offlineMode) {
-            return new OImageState();
-        } else {
-            return super.createState();
+            return super.getState();
         }
     }
 
     @Override
     public void onOfflineState(SharedState state) {
-        offlineState = (OImageState)state;
+        offlineState = (ImageState)state;
         StateChangeEvent event = new StateChangeEvent(this, null, true);
         onStateChanged(event);
     }

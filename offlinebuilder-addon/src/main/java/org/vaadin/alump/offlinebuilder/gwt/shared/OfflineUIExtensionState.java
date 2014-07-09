@@ -1,8 +1,7 @@
-package org.vaadin.alump.offlinebuilder.gwt.client.state;
+package org.vaadin.alump.offlinebuilder.gwt.shared;
 
 import com.vaadin.shared.Connector;
 import com.vaadin.shared.communication.SharedState;
-import com.vaadin.shared.ui.ui.UIState;
 
 /**
  * Created by alump on 09/06/14.

@@ -44,16 +44,26 @@ public class DemoUI extends UI {
         image.setSource(new ThemeResource("img/offline.png"));
         layout.addComponent(image);
 
-        /*
-        OfflineButton button = new OfflineButton("Ping server");
-        button.addClickListener(new Button.ClickListener() {
+        OfflineHorizontalLayout buttonLayout = new OfflineHorizontalLayout();
+        layout.addComponent(buttonLayout);
+
+        OfflineButton pingButton = new OfflineButton("Ping server");
+        pingButton.addClickListener(new Button.ClickListener() {
             @Override
             public void buttonClick(Button.ClickEvent clickEvent) {
                 Notification.show("Server says pong!");
             }
         });
-        layout.addComponent(button);
-        */
+        buttonLayout.addComponent(pingButton);
+
+        OfflineButton writeButton = new OfflineButton("Store value (TODO)");
+        writeButton.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent clickEvent) {
+                Notification.show("No need to store, in online mode.");
+            }
+        });
+        buttonLayout.addComponent(writeButton);
     }
 
 }

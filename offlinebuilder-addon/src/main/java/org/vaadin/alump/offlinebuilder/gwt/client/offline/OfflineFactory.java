@@ -15,15 +15,15 @@ import com.vaadin.shared.Connector;
 import com.vaadin.shared.communication.SharedState;
 import org.vaadin.alump.offlinebuilder.gwt.client.BuilderOfflineMode;
 import org.vaadin.alump.offlinebuilder.gwt.client.InstanceFromClassName;
+import org.vaadin.alump.offlinebuilder.gwt.client.OfflineConnection;
 import org.vaadin.alump.offlinebuilder.gwt.client.conn.ORootConnector;
 import org.vaadin.alump.offlinebuilder.gwt.client.conn.OfflineConnector;
 import org.vaadin.alump.offlinebuilder.gwt.client.conn.OfflineContainerConnector;
-import org.vaadin.alump.offlinebuilder.gwt.client.state.OfflineUIExtensionState;
+import org.vaadin.alump.offlinebuilder.gwt.shared.OfflineUIExtensionState;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -38,27 +38,39 @@ public class OfflineFactory {
     protected final static String UI_CLASS_KEY = "uiclass";
     protected final static String ROOT_KEY = "root";
 
-    public OfflineFactory() {
+    protected static OfflineConnection offlineConnection;
 
+    public OfflineFactory() {
+    }
+
+    public static OfflineConnection getOfflineApplicationConnection() {
+        if(offlineConnection == null) {
+            offlineConnection = new OfflineConnection();
+        }
+        return offlineConnection;
     }
 
     protected void readState(OfflineConnector connector) {
         JSONValue jsonState = OfflineStorage.getStateJson(connector.getConnectorId());
         connector.setOffline(true);
         SharedState state = decodeState(jsonState, connector.getState(), connector.getConnection());
-        connector.onOfflineState(state);
-        List<String> children = OfflineStorage.getChildren(connector.getConnectorId());
+        if(state != null) {
+            connector.onOfflineState(state);
+            List<String> children = OfflineStorage.getChildren(connector.getConnectorId());
 
-        if(children != null) {
-            List<OfflineConnector> added = new ArrayList<OfflineConnector>();
-            for(String pid : children) {
-                OfflineConnector childConnector = getOfflineConnector(pid);
-                readState(childConnector);
-                added.add(childConnector);
+            if (children != null) {
+                List<OfflineConnector> added = new ArrayList<OfflineConnector>();
+                for (String pid : children) {
+                    OfflineConnector childConnector = getOfflineConnector(pid);
+                    readState(childConnector);
+                    added.add(childConnector);
+                }
+                if (!added.isEmpty()) {
+                    ((OfflineContainerConnector) connector).onOfflineHierarchy(added);
+                }
             }
-            if(!added.isEmpty()) {
-                ((OfflineContainerConnector)connector).onOfflineHierarchy(added);
-            }
+        } else {
+            logger.severe("Failed to read state of component " + connector.getConnectorId() + ", leaving it uninitialized.");
         }
     }
 
@@ -87,7 +99,15 @@ public class OfflineFactory {
     }
 
     protected SharedState decodeState(JSONValue jsonState, SharedState state, ApplicationConnection connection) {
-        SharedState ret = (SharedState) JsonDecoder.decodeValue(new Type(state.getClass().getName(), null), jsonState, state, connection);
+        SharedState ret;
+
+        try {
+            ret = (SharedState) JsonDecoder.decodeValue(new Type(state.getClass().getName(), null), jsonState, state, connection);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "JSON State decoding exception", e);
+            logger.warning("Failed to decode state of component with JSON: " + jsonState.toString());
+            ret = null;
+        }
         return ret;
     }
 
@@ -97,7 +117,7 @@ public class OfflineFactory {
         OfflineConnector connector = (OfflineConnector)generator.instantiate(connectorClass);
 
         connector.setOffline(true);
-        connector.doInit(pid, null);
+        connector.doInit(pid, getOfflineApplicationConnection());
         return connector;
     }
 
