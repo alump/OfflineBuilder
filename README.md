@@ -1,6 +1,8 @@
 OfflineBuilder
 ==============
 
+[![Build Status](http://siika.fi:8888/jenkins/job/OfflineBuilder%20(Vaadin)/badge/icon)](http://siika.fi:8888/jenkins/job/OfflineBuilder%20(Vaadin)/)
+
 Idea of project is create addon that would be allow construction of offline UI for TouchKit applications
 on server side. Initial goal would be to allow to write very simple UIs. And then adding more features
 when core Vaadin framework allows to do so.
