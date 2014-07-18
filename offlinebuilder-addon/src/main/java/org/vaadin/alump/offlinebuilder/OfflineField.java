@@ -1,8 +1,11 @@
 package org.vaadin.alump.offlinebuilder;
 
 /**
- * Created by alump on 09/06/14.
+ * Interface all offline field components must implement
  */
-@Deprecated
-public class OfflineField implements OfflineComponent {
+public interface OfflineField extends OfflineComponent {
+
+    public void setOfflineValueKey(String key);
+
+    public String getOfflineValueKey();
 }

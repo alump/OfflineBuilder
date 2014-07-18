@@ -1,9 +1,6 @@
 package org.vaadin.alump.offlinebuilder.gwt.client.offline;
 
-import com.google.gwt.json.client.JSONArray;
-import com.google.gwt.json.client.JSONParser;
-import com.google.gwt.json.client.JSONString;
-import com.google.gwt.json.client.JSONValue;
+import com.google.gwt.json.client.*;
 import com.google.gwt.storage.client.Storage;
 import com.vaadin.addon.touchkit.extensions.LocalStorage;
 
@@ -11,11 +8,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * Created by alump on 08/07/14.
  */
 public class OfflineStorage {
+
+    private final static Logger logger = Logger.getLogger(OfflineStorage.class.getName());
 
     public final static String KEY_PREFIX = "o-";
     public final static String KEY_SEPARATOR = "-";
@@ -23,6 +23,7 @@ public class OfflineStorage {
     public final static String CONNECTOR_KEY = "connector";
     public final static String STATE_KEY = "state";
     public final static String CHILDREN_KEY = "children";
+    public final static String DATA_KEY = KEY_PREFIX + "data";
 
     private final static Storage storage = Storage.getLocalStorageIfSupported();
 
@@ -60,6 +61,62 @@ public class OfflineStorage {
 
     public static void set(String pid, String key, String value) {
         set(generateKey(pid, key), value);
+    }
+
+    public static void setData(String key, String value) {
+        writeData(key, value);
+    }
+
+    public static void setData(String key, Boolean value) {
+        writeData(key, value);
+    }
+
+    public static void setData(String key, Number value) {
+        writeData(key, value);
+    }
+
+    protected static JSONObject cachedData;
+
+    protected static JSONObject getData() {
+        if(cachedData == null) {
+            String jsonString = get(DATA_KEY);
+            JSONObject data;
+            if(jsonString == null) {
+                data = new JSONObject();
+            } else {
+                data = JSONParser.parseStrict(jsonString).isObject();
+                if(data == null) {
+                    logger.severe("Invalid data content read from Local Storage");
+                    data = new JSONObject();
+                }
+            }
+            cachedData = data;
+        }
+
+        return cachedData;
+    }
+
+    protected static void storeData() {
+        set(DATA_KEY, getData().toString());
+    }
+
+    protected static void writeData(String key, Object value) {
+        JSONObject data = getData();
+        JSONValue jsonValue = null;
+        if(value instanceof String) {
+            jsonValue = new JSONString((String) value);
+        } else if (value instanceof Boolean) {
+            jsonValue = JSONBoolean.getInstance((Boolean)value);
+        } else if (value instanceof Number) {
+            jsonValue = new JSONNumber(((Number) value).doubleValue());
+        }
+
+        if(jsonValue == null) {
+            logger.severe("Can not store given '" + key + "' value's type to data");
+            return;
+        }
+        data.put(key, jsonValue);
+        storeData();
     }
 
     public static void setStateJson(String pid, JSONValue json) {

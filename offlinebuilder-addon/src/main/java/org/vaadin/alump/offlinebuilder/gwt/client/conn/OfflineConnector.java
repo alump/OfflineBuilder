@@ -1,5 +1,6 @@
 package org.vaadin.alump.offlinebuilder.gwt.client.conn;
 
+import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.ApplicationConnection;
 import com.vaadin.client.communication.StateChangeEvent;
@@ -40,7 +41,7 @@ public interface OfflineConnector {
 
     /**
      */
-    void onOfflineState(SharedState state);
+    void onOfflineState(SharedState state, JSONObject jsonState);
 
     void setOffline(boolean offline);
 }

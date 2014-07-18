@@ -1,6 +1,7 @@
 package org.vaadin.alump.offlinebuilder.gwt.client.conn;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.VLabel;
@@ -41,9 +42,9 @@ public class OLabelConnector extends LabelConnector implements OfflineConnector 
     }
 
     @Override
-    public void onOfflineState(SharedState state) {
+    public void onOfflineState(SharedState state, JSONObject jsonState) {
         offlineState = (LabelState)state;
-        StateChangeEvent event = new StateChangeEvent(this, null, true);
+        StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
         onStateChanged(event);
     }
 

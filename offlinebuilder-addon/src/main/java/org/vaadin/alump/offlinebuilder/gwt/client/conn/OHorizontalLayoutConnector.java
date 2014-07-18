@@ -1,5 +1,6 @@
 package org.vaadin.alump.offlinebuilder.gwt.client.conn;
 
+import com.google.gwt.json.client.JSONObject;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
 import com.vaadin.client.communication.StateChangeEvent;
@@ -33,9 +34,9 @@ public class OHorizontalLayoutConnector extends HorizontalLayoutConnector implem
     }
 
     @Override
-    public void onOfflineState(SharedState state) {
+    public void onOfflineState(SharedState state,  JSONObject jsonState) {
         offlineState = (HorizontalLayoutState)state;
-        StateChangeEvent event = new StateChangeEvent(this, null, true);
+        StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
         this.onStateChanged(event);
     }
 
@@ -58,7 +59,11 @@ public class OHorizontalLayoutConnector extends HorizontalLayoutConnector implem
 
     @Override
     public void setOffline(boolean offline) {
+        if(offlineMode == false && offline == true) {
+            offlineState = new HorizontalLayoutState();
+        }
         offlineMode = offline;
+
     }
 
     @Override

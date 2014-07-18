@@ -64,6 +64,14 @@ public class DemoUI extends UI {
             }
         });
         buttonLayout.addComponent(writeButton);
+
+        /*
+        OfflineFormLayout formTest = new OfflineFormLayout();
+        OfflineCheckBox checkbox = new OfflineCheckBox("Flag me");
+        checkbox.setOfflineValueKey("flag");
+        formTest.addComponent(checkbox);
+        layout.addComponent(formTest);
+        */
     }
 
 }

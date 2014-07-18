@@ -1,5 +1,6 @@
 package org.vaadin.alump.offlinebuilder.gwt.client.conn;
 
+import com.google.gwt.json.client.JSONObject;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.image.ImageConnector;
 import com.vaadin.shared.communication.SharedState;
@@ -28,9 +29,9 @@ public class OImageConnector extends ImageConnector implements OfflineConnector 
     }
 
     @Override
-    public void onOfflineState(SharedState state) {
+    public void onOfflineState(SharedState state, JSONObject jsonState) {
         offlineState = (ImageState)state;
-        StateChangeEvent event = new StateChangeEvent(this, null, true);
+        StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
         onStateChanged(event);
     }
 

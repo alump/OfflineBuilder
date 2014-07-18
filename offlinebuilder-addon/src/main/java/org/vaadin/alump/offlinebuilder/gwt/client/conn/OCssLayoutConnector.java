@@ -1,6 +1,7 @@
 package org.vaadin.alump.offlinebuilder.gwt.client.conn;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.ConnectorHierarchyChangeEvent;
@@ -32,9 +33,9 @@ public class OCssLayoutConnector extends CssLayoutConnector implements OfflineCo
     }
 
     @Override
-    public void onOfflineState(SharedState state) {
+    public void onOfflineState(SharedState state, JSONObject jsonState) {
         offlineState = (CssLayoutState)state;
-        StateChangeEvent event = new StateChangeEvent(this, null, true);
+        StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
         this.onStateChanged(event);
     }
 

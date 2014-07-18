@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.HTML;
 import com.vaadin.client.ApplicationConnection;
 import com.vaadin.client.ComponentConnector;
 import com.vaadin.client.communication.JsonDecoder;
-import com.vaadin.client.communication.JsonEncoder;
+//import com.vaadin.client.communication.JsonEncoder;
 import com.vaadin.client.metadata.Type;
 import com.vaadin.client.ui.AbstractHasComponentsConnector;
 
@@ -55,18 +55,20 @@ public class OfflineFactory {
         connector.setOffline(true);
         SharedState state = decodeState(jsonState, connector.getState(), connector.getConnection());
         if(state != null) {
-            connector.onOfflineState(state);
+            connector.onOfflineState(state, jsonState.isObject());
             List<String> children = OfflineStorage.getChildren(connector.getConnectorId());
 
             if (children != null) {
                 List<OfflineConnector> added = new ArrayList<OfflineConnector>();
                 for (String pid : children) {
                     OfflineConnector childConnector = getOfflineConnector(pid);
-                    readState(childConnector);
                     added.add(childConnector);
                 }
                 if (!added.isEmpty()) {
                     ((OfflineContainerConnector) connector).onOfflineHierarchy(added);
+                }
+                for(OfflineConnector child : added) {
+                    readState(child);
                 }
             }
         } else {

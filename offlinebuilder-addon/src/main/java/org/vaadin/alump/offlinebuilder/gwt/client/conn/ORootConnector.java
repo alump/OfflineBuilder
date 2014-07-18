@@ -1,5 +1,6 @@
 package org.vaadin.alump.offlinebuilder.gwt.client.conn;
 
+import com.google.gwt.json.client.JSONObject;
 import com.vaadin.client.ApplicationConnection;
 import com.vaadin.shared.communication.SharedState;
 import org.vaadin.alump.offlinebuilder.gwt.client.OfflineRootPanel;
@@ -41,7 +42,7 @@ public class ORootConnector implements OfflineConnector {
     }
 
     @Override
-    public void onOfflineState(SharedState state) {
+    public void onOfflineState(SharedState state, JSONObject jsonState) {
         // ignore
     }
 

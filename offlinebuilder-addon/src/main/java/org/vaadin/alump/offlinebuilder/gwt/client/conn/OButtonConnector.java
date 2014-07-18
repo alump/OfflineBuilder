@@ -2,6 +2,7 @@ package org.vaadin.alump.offlinebuilder.gwt.client.conn;
 
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.json.client.JSONObject;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.button.ButtonConnector;
 import com.vaadin.shared.communication.SharedState;
@@ -29,7 +30,7 @@ public class OButtonConnector extends ButtonConnector implements OfflineConnecto
     }
 
     @Override
-    public void onOfflineState(SharedState state) {
+    public void onOfflineState(SharedState state, JSONObject jsonState) {
         offlineState = (OButtonState)state;
 
         // TODO: replace with offline handler checks
@@ -37,7 +38,7 @@ public class OButtonConnector extends ButtonConnector implements OfflineConnecto
             offlineState.enabled = false;
         }
 
-        StateChangeEvent event = new StateChangeEvent(this, null, true);
+        StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
         onStateChanged(event);
     }
 
