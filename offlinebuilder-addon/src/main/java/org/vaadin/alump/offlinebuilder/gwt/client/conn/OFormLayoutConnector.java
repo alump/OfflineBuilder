@@ -53,8 +53,7 @@ public class OFormLayoutConnector extends FormLayoutConnector implements Offline
     @Override
     public void onOfflineState(SharedState state,  JSONObject jsonState) {
         offlineState = (AbstractOrderedLayoutState)state;
-        StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
-        onStateChanged(event);
+        fireEvent(new StateChangeEvent(this, jsonState, true));
     }
 
     @Override

@@ -36,8 +36,7 @@ public class OHorizontalLayoutConnector extends HorizontalLayoutConnector implem
     @Override
     public void onOfflineState(SharedState state,  JSONObject jsonState) {
         offlineState = (HorizontalLayoutState)state;
-        StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
-        this.onStateChanged(event);
+        fireEvent(new StateChangeEvent(this, jsonState, true));
     }
 
     @Override

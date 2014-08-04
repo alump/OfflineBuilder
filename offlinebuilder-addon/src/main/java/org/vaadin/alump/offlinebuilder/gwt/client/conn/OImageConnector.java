@@ -31,8 +31,7 @@ public class OImageConnector extends ImageConnector implements OfflineConnector 
     @Override
     public void onOfflineState(SharedState state, JSONObject jsonState) {
         offlineState = (ImageState)state;
-        StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
-        onStateChanged(event);
+        fireEvent(new StateChangeEvent(this, jsonState, true));
     }
 
     @Override

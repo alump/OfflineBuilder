@@ -35,16 +35,14 @@ public class BuilderOfflineMode extends DefaultOfflineMode {
         ConnectorBundleLoader.get().loadBundle(
                 ConnectorBundleLoader.EAGER_BUNDLE_NAME, null);
 
-        logger.severe("build default content");
         getPanel().clear();
         if(rootConnector == null) {
             rootConnector = GWT.create(ORootConnector.class);
-
         }
+
         if(rootConnector != null) {
             Widget rootWidget = rootConnector.getWidget();
             if(rootWidget != null) {
-                logger.severe("Adding root widget");
                 getPanel().add(rootWidget);
                 getOfflineFactory().readRootState(rootConnector);
             } else {

@@ -3,11 +3,10 @@ package org.vaadin.alump.offlinebuilder.demo;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.server.Page;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.server.VaadinRequest;
-import com.vaadin.ui.Button;
-import com.vaadin.ui.Notification;
-import com.vaadin.ui.UI;
+import com.vaadin.ui.*;
 import org.vaadin.alump.offlinebuilder.*;
 
 import javax.servlet.annotation.WebServlet;
@@ -29,7 +28,9 @@ public class DemoUI extends UI {
 
         OfflineUIExtension offlineExtension = OfflineUIExtension.get(this);
 
-        OfflineCssLayout layout = new OfflineCssLayout();
+        OfflineVerticalLayout layout = new OfflineVerticalLayout();
+        layout.setMargin(true);
+        layout.setSpacing(true);
         layout.addStyleName("main-layout");
         setContent(layout);
         offlineExtension.setOfflineRoot(layout);
@@ -45,6 +46,7 @@ public class DemoUI extends UI {
         layout.addComponent(image);
 
         OfflineHorizontalLayout buttonLayout = new OfflineHorizontalLayout();
+        buttonLayout.setSpacing(true);
         layout.addComponent(buttonLayout);
 
         OfflineButton pingButton = new OfflineButton("Ping server");
@@ -72,6 +74,7 @@ public class DemoUI extends UI {
         formTest.addComponent(checkbox);
         layout.addComponent(formTest);
         */
+
     }
 
 }

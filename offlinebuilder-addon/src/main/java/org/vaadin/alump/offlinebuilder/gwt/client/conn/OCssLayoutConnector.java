@@ -35,8 +35,7 @@ public class OCssLayoutConnector extends CssLayoutConnector implements OfflineCo
     @Override
     public void onOfflineState(SharedState state, JSONObject jsonState) {
         offlineState = (CssLayoutState)state;
-        StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
-        this.onStateChanged(event);
+        fireEvent(new StateChangeEvent(this, jsonState, true));
     }
 
     @Override

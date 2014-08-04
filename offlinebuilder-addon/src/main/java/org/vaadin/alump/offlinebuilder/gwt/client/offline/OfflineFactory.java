@@ -6,6 +6,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.vaadin.client.ApplicationConnection;
 import com.vaadin.client.ComponentConnector;
+import com.vaadin.client.ServerConnector;
 import com.vaadin.client.communication.JsonDecoder;
 //import com.vaadin.client.communication.JsonEncoder;
 import com.vaadin.client.metadata.Type;
@@ -119,6 +120,7 @@ public class OfflineFactory {
         OfflineConnector connector = (OfflineConnector)generator.instantiate(connectorClass);
 
         connector.setOffline(true);
+        getOfflineApplicationConnection().offlineRegisterConnector((ServerConnector)connector, pid);
         connector.doInit(pid, getOfflineApplicationConnection());
         return connector;
     }
@@ -148,6 +150,13 @@ public class OfflineFactory {
         if(rootPid != null) {
             OfflineConnector rootConnector = getOfflineConnector(rootPid);
             connector.getWidget().add(BuilderOfflineMode.resolveWidget(rootConnector));
+
+            // Set tooltip's owner as top most component connector
+            //logger.severe("tooltip init start");
+            //getOfflineApplicationConnection().getVTooltip().setOwner(((ComponentConnector)rootConnector).getWidget());
+            //getOfflineApplicationConnection().getVTooltip().initializeAssistiveTooltips();
+            //logger.severe("tooltip init end");
+
             readState(rootConnector);
         } else {
             HTML error = new HTML();

@@ -1,6 +1,7 @@
 package org.vaadin.alump.offlinebuilder.gwt.client;
 
 import com.vaadin.client.ApplicationConnection;
+import com.vaadin.client.ConnectorMap;
 import com.vaadin.client.ServerConnector;
 import com.vaadin.shared.communication.MethodInvocation;
 
@@ -71,5 +72,19 @@ public class OfflineConnection extends ApplicationConnection {
                                Object[] values, boolean immediate) {
         logger.warning("Update '\" + variableName + \"' variable not supported in offline mode");
     }
+
+    public void offlineRegisterConnector(ServerConnector connector, String pid) {
+        getConnectorMap(this).registerConnector(pid, connector);
+    }
+
+    /**
+     * Because connectorMap is private, workaround access to it
+     * @param connection
+     * @return
+     */
+    static final native protected ConnectorMap getConnectorMap(ApplicationConnection connection)
+    /*-{
+        return connection.@com.vaadin.client.ApplicationConnection::connectorMap;
+    }-*/;
 
 }

@@ -32,8 +32,7 @@ public class OCheckBoxConnector extends CheckBoxConnector implements OfflineConn
     @Override
     public void onOfflineState(SharedState state,  JSONObject jsonState) {
         offlineState = (OCheckBoxState)state;
-        StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
-        onStateChanged(event);
+        fireEvent(new StateChangeEvent(this, jsonState, true));
     }
 
     @Override

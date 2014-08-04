@@ -40,7 +40,7 @@ public class OVerticalLayoutConnector extends VerticalLayoutConnector implements
     public void onOfflineState(SharedState state, JSONObject jsonState) {
         offlineState = (VerticalLayoutState)state;
         StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
-        this.onStateChanged(event);
+        fireEvent(event);
     }
 
     @Override

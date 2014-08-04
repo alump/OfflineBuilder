@@ -38,8 +38,7 @@ public class OButtonConnector extends ButtonConnector implements OfflineConnecto
             offlineState.enabled = false;
         }
 
-        StateChangeEvent event = new StateChangeEvent(this, jsonState, true);
-        onStateChanged(event);
+        fireEvent(new StateChangeEvent(this, jsonState, true));
     }
 
     @Override
