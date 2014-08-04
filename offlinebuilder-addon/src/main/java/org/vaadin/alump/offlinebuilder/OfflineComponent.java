@@ -1,3 +1,11 @@
+/*
+ * OfflineBuilder
+ *
+ * Copyright (c) 2014 Sami Viitanen <alump@vaadin.com>
+ *
+ * See LICENSE.txt
+ */
+
 package org.vaadin.alump.offlinebuilder;
 
 /**

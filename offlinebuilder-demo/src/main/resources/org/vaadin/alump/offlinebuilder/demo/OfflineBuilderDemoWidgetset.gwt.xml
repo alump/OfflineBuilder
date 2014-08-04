@@ -12,8 +12,8 @@
 	<define-linker name="touchkitcachemanifest"
 				   class="org.vaadin.alump.offlinebuilder.demo.gwt.DemoCacheManifestLinker" />
 
-	<!-- to speed up things during development-->
-	<set-property name="user.agent" value="safari"/>
+	<!-- to speed up things during development
+	<set-property name="user.agent" value="safari"/> -->
 
 	<!-- to enable superdev... -->
 	<add-linker name="xsiframe" />

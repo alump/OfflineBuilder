@@ -7,7 +7,7 @@
     <packaging>war</packaging>
     <name>OfflineBuilder demo</name>
     <description>OfflibeBuilder Addon Demo Application</description>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
 
     <properties>
         <Implementation-Version>${project.version}</Implementation-Version>
@@ -18,7 +18,7 @@
         <license.short.name>agpl-3.0</license.short.name>
         <vaadin.version>7.2.6</vaadin.version>
         <vaadin.plugin.version>7.2.6</vaadin.plugin.version>
-        <touchkit.version>4.0.0.beta1</touchkit.version>
+        <touchkit.version>4.0.0.beta2</touchkit.version>
 
         <!-- Must not change this because of the Directory -->
         <Implementation-Title>OfflineBuilder</Implementation-Title>
@@ -121,10 +121,10 @@
                     <noServer>true</noServer>
                     <runTarget>http://localhost:8080/</runTarget>
                     <port>8181</port>
-                    <draftCompile>true</draftCompile>
-                    <!-- false -->
-                    <style>PRETTY</style>
-                    <!-- OBF -->
+                    <draftCompile>false</draftCompile>
+                    <!-- true -->
+                    <style>OBF</style>
+                    <!-- PRETTY -->
                     <strict>true</strict>
                     <compileReport>false</compileReport>
                 </configuration>

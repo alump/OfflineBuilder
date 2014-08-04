@@ -5,7 +5,7 @@
     <artifactId>offlinebuilder-addon</artifactId>
     <packaging>jar</packaging>
     <name>OfflineBuilder addon</name>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
 
     <description>OfflineBuilder Vaadin 7.2, Touchkit 4 addon</description>
 
@@ -33,7 +33,7 @@
         <license.short.name>agpl-3.0</license.short.name>
         <vaadin.version>7.2.6</vaadin.version>
         <vaadin.plugin.version>7.2.6</vaadin.plugin.version>
-		<touchkit.version>4.0.0.beta1</touchkit.version>
+		<touchkit.version>4.0.0.beta2</touchkit.version>
 
         <snapshot.repository.url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/
         </snapshot.repository.url>
