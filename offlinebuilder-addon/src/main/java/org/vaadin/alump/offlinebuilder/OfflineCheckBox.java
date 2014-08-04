@@ -1,12 +1,11 @@
 package org.vaadin.alump.offlinebuilder;
 
 import com.vaadin.data.Property;
-import com.vaadin.ui.AbstractField;
 import com.vaadin.ui.CheckBox;
-import org.vaadin.alump.offlinebuilder.gwt.shared.OCheckBoxState;
+import org.vaadin.alump.offlinebuilder.shared.OCheckBoxState;
 
 /**
- * Created by alump on 18/07/14.
+ * Offline version of CheckBox component
  */
 public class OfflineCheckBox extends CheckBox implements OfflineField {
 

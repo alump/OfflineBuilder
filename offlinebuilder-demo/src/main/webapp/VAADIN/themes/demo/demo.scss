@@ -4,6 +4,43 @@
 
   @include reindeer;
 
+  .v-ui::after, .offline-root::after  {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: white;
+    z-index: 2000;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    line-height: auto;
+  }
+
+  .v-ui::after {
+    content: "ONLINE";
+    background-color: rgba(0,128,0,0.25);
+  }
+
+  .offline-root::after {
+    content: "OFFLINE";
+    background-color: rgba(192,0,0,0.25);
+  }
+
+  .scrollable-wrapper {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
   .main-layout {
+
+    .header-label {
+      text-align: center;
+      font-size: 18px;
+      line-height: 20px;
+    }
+
+    .info-label {
+
+    }
   }
 }

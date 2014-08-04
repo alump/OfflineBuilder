@@ -3,8 +3,9 @@ package org.vaadin.alump.offlinebuilder;
 import com.vaadin.ui.FormLayout;
 
 /**
- * Created by alump on 18/07/14.
+ * FormLayout not yet fully supported
  */
+@Deprecated
 public class OfflineFormLayout extends FormLayout implements OfflineComponent {
     public OfflineFormLayout() {
         super();

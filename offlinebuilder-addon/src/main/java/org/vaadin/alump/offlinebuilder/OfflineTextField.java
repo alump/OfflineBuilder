@@ -1,10 +1,11 @@
 package org.vaadin.alump.offlinebuilder;
 
-import org.vaadin.alump.offlinebuilder.gwt.shared.OTextFieldState;
+import org.vaadin.alump.offlinebuilder.shared.OTextFieldState;
 
 /**
- * Created by alump on 09/06/14.
+ * Class not yet supported
  */
+@Deprecated
 public class OfflineTextField extends AbstractOfflineField<String> {
 
     protected OTextFieldState getState() {

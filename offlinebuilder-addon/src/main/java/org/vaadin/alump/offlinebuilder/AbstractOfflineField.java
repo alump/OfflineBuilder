@@ -1,12 +1,12 @@
 package org.vaadin.alump.offlinebuilder;
 
-import com.vaadin.ui.AbstractComponent;
 import com.vaadin.ui.AbstractField;
-import org.vaadin.alump.offlinebuilder.gwt.shared.AbstractOfflineFieldState;
+import org.vaadin.alump.offlinebuilder.shared.AbstractOfflineFieldState;
 
 /**
  * Base class for offline field components that can not be inherited from core components
  */
+@Deprecated
 public abstract class AbstractOfflineField<T> extends AbstractField<T> implements OfflineField {
 
     protected AbstractOfflineFieldState getState() {
